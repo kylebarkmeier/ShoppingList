@@ -3,3 +3,4 @@
 .env
 .env.local
 yarn-error.log
+nohup.out

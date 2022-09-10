@@ -1,0 +1,99 @@
+{
+  "homepage": "https://github.com/kylebarkmeier",
+  "name": "@kylebarkmeier/shopping-list",
+  "description": "A simple shopping list.",
+  "license": "MIT",
+  "author": "Kyle Barkmeier",
+  "dependencies": {
+    "@emotion/react": "^11.10.4",
+    "@emotion/styled": "^11.10.4",
+    "@fontsource/dosis": "^4.5.9",
+    "@fontsource/nunito": "^4.5.10",
+    "@mui/icons-material": "^5.10.3",
+    "@mui/material": "^5.10.4",
+    "@reduxjs/toolkit": "^1.8.5",
+    "babel-loader": "^8.2.5",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "express": "^5.0.0-beta.1",
+    "mongoose": "^6.6.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-error-boundary": "^3.1.4",
+    "react-redux": "^8.0.2",
+    "react-router-dom": "^6.3.0",
+    "redux": "^4.2.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.19.0",
+    "@babel/plugin-transform-runtime": "^7.18.10",
+    "@babel/preset-env": "^7.19.0",
+    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-typescript": "^7.18.6",
+    "@babel/runtime": "^7.19.0",
+    "@types/node": "^18.7.16",
+    "@types/react": "^18.0.18",
+    "@types/react-dom": "^18.0.6",
+    "@types/react-redux": "^7.1.24",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/redux": "^3.6.0",
+    "@typescript-eslint/eslint-plugin": "^5.36.2",
+    "@typescript-eslint/parser": "^5.36.2",
+    "css-loader": "^6.7.1",
+    "dotenv": "^16.0.2",
+    "eslint": "^8.23.0",
+    "eslint-config-react-app": "^7.0.1",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-flowtype": "^8.0.3",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.1",
+    "eslint-plugin-react": "^7.31.7",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "favicons": "^7.0.0-beta.5",
+    "favicons-webpack-plugin": "^5.0.2",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.1",
+    "postcss-loader": "^7.0.1",
+    "prettier": "^2.7.1",
+    "react-hot-loader": "^4.13.0",
+    "sass": "^1.54.9",
+    "sass-loader": "^13.0.2",
+    "style-loader": "^3.3.1",
+    "terser-webpack-plugin": "^5.3.6",
+    "ts-loader": "^9.3.1",
+    "typescript": "^4.8.3",
+    "webpack": "^5.74.0",
+    "webpack-cli": "^4.10.0",
+    "webpack-dev-server": "^4.11.0",
+    "webpack-manifest-plugin": "^5.0.0"
+  },
+  "scripts": {
+    "start:mongodb": "nohup mongod --config /usr/local/etc/mongod.conf &",
+    "start:api": "nohup node packages/api/index.js &",
+    "start:ui": "webpack serve --config webpack.config.js --mode development",
+    "prestart": "yarn start:mongodb;yarn start:api",
+    "start": "yarn start:ui",
+    "build:ui": "webpack --config webpack.config.js --mode production",
+    "clean:ui": "rm -Rf node_modules;rm -Rf dist"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app"
+    ]
+  },
+  "engines": {
+    "node": ">=v18.0.0"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

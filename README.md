@@ -13,5 +13,6 @@
 ## TODO/Potential Improvements
 
 1. Optimize docker containers (e.g. separate package.json & Dockerfile for backend services so image isn't so big, persist DB as file(s) on stop, etc.)
-2. Use MUI theme more extensively with style, typography, & component overrides in the theme itself (except for one-off components).
-3. Drag & drop reordering of list items (would require some backend changes, too, as the items are currently sorted by creation date).
+2. CI/CD for docker & frontend through github's container & pages services
+3. Use MUI theme more extensively with style, typography, & component overrides in the theme itself (except for one-off components).
+4. Drag & drop reordering of list items (would require some backend changes, too, as the items are currently sorted by creation date).

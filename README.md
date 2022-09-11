@@ -1,6 +1,6 @@
 # Simple Shopping List
 
- A simple shopping list made in React, MUI, TypeScript, NodeJS, Express, & MongoDB.
+ A simple shopping list made in React, MUI, TypeScript, NodeJS, Express, MongoDB, & Docker.
  
 ## Decisions
 
@@ -8,7 +8,7 @@
  once I get my webpack/TypeScript config working. Express for the API makes REST CRUD operations a snap with their
  routes & HTTP method handlers. This was my first time using MongoDB and I chose it purely for the sake of convenience,
  as it integrates very well with a Node backend, and allows the use of a Schema. Refreshed my docker knowledge to put
- the backend service sin containers for cleaner start/stop.
+ the backend services in containers for cleaner start/stop.
  
 ## TODO/Potential Improvements
 

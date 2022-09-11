@@ -171,7 +171,7 @@ const AddEditItem = ({
               alignItems="center"
             >
               <Checkbox
-                sx={{ p: 0 }}
+                sx={{ p: 0, mr: 1.625 }}
                 checked={purchased}
                 onChange={(event, checked) => setPurchased(checked)}
               />{' '}

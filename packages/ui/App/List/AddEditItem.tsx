@@ -163,7 +163,13 @@ const AddEditItem = ({
             ))}
           </TextField>
           {Boolean(item) && (
-            <Box component="label" mb={28.25} color="#C6C6C6" display="block">
+            <Box
+              component="label"
+              mb={28.25}
+              color="#C6C6C6"
+              display="flex"
+              alignItems="center"
+            >
               <Checkbox
                 sx={{ p: 0 }}
                 checked={purchased}

@@ -1,13 +1,12 @@
 const express = require('express');
 const cors = require('cors');
-const bodyParser = require('body-parser');
 const { ListItem } = require('../storage');
 
 const port = 3000;
 
 const app = express();
 app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
 app
   .route('/items')
   .get((req, res) => {
@@ -16,7 +15,7 @@ app
       .sort({ purchased: 'asc' })
       .exec(function (error, list) {
         if (error) {
-          return res.status(500).send({ data: error });
+          return res.status(error.status || 500).send({ data: error });
         }
         res.send({ data: list });
       });
@@ -24,7 +23,7 @@ app
   .post((req, res) => {
     ListItem.create({ created: Date.now(), ...req.body }, (error, newItem) => {
       if (error) {
-        return res.status(500).send({ data: error });
+        return res.status(error.status || 500).send({ data: error });
       }
       res.send({ data: newItem });
     });
@@ -38,7 +37,7 @@ app
       .sort({ purchased: 'asc' })
       .exec(function (error, list) {
         if (error) {
-          return res.status(500).send({ data: error });
+          return res.status(error.status || 500).send({ data: error });
         }
         res.send({ data: list });
       });
@@ -49,7 +48,7 @@ app
       { lastModified: Date.now(), ...req.body },
       (error, result) => {
         if (error) {
-          return res.status(500).send({ data: error });
+          return res.status(error.status || 500).send({ data: error });
         }
         res.send({ data: result });
       }
@@ -62,12 +61,17 @@ app
       req.body,
       (error) => {
         if (error) {
-          return res.status(500).send({ data: error });
+          return res.status(error.status || 500).send({ data: error });
         }
         res.send({ data: { success: true } });
       }
     );
   });
+
+// error handler
+app.use(function (error, req, res) {
+  res.status(error.status || 500).send({ data: error });
+});
 
 app.listen(port, () => {
   console.log(`API listening on port ${port}`);

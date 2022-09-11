@@ -1,0 +1,22 @@
+version: "3.9"
+networks:
+  default:
+services:
+  api:
+    container_name: shoppinglist-api
+    restart: always
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - mongodb
+    networks:
+      - default
+  mongodb:
+    container_name: mongodb
+    image: mongo
+    ports:
+      - 27017:27017
+    command: mongod --noauth
+    networks:
+      - default

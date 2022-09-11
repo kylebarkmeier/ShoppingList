@@ -1,6 +1,6 @@
 # Simple Shopping List
 
- A simple shopping list made in React, MUI, TypeScript, NodeJS, Express, MongoDB, & Docker.
+ A simple shopping list made in React, MUI, Redux ToolKit, TypeScript, NodeJS, Express, MongoDB, & Docker.
  
 ## Decisions
 

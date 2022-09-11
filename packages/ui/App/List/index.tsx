@@ -1,11 +1,37 @@
-import { Grid, Typography, List, CircularProgress } from '@mui/material';
-import { useItemsQuery } from 'services/queries';
+import * as React from 'react';
+import {
+  Grid,
+  Typography,
+  List,
+  CircularProgress,
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogActions,
+  Button,
+  DialogContentText,
+} from '@mui/material';
+import { useDeleteItemMutation, useItemsQuery } from 'services/queries';
 import { ListItemType } from 'services/types';
 import Item from './Item';
 import AddEditItem from './AddEditItem';
 
 const ShoppingList = () => {
   const itemsQuery = useItemsQuery();
+  const [deleteItem, deleteItemStatus] = useDeleteItemMutation();
+  const [itemToDelete, setItemToDelete] = React.useState<string | null>(null);
+
+  const handleDelete = React.useCallback(() => {
+    if (itemToDelete) {
+      deleteItem({ _id: itemToDelete });
+    }
+  }, [deleteItem, itemToDelete]);
+
+  React.useEffect(() => {
+    if (deleteItemStatus.isSuccess) {
+      setItemToDelete(null);
+    }
+  }, [deleteItemStatus.isSuccess, setItemToDelete]);
 
   return (
     <Grid
@@ -34,7 +60,12 @@ const ShoppingList = () => {
           </Grid>
           <List disablePadding sx={{ width: '100%' }}>
             {itemsQuery.data.map((item: ListItemType, index: number) => (
-              <Item key={`shopping-list-item-${index}`} item={item} />
+              <Item
+                key={`shopping-list-item-${index}`}
+                item={item}
+                onDelete={(id) => setItemToDelete(id)}
+                isDeleting={deleteItemStatus.isLoading}
+              />
             ))}
           </List>
         </>
@@ -59,6 +90,36 @@ const ShoppingList = () => {
           <AddEditItem>Add your first item</AddEditItem>
         </Grid>
       )}
+      <Dialog
+        open={Boolean(itemToDelete)}
+        PaperProps={{ sx: { width: 410, py: 1.75, px: 0.75 } }}
+      >
+        <DialogTitle>Delete Item?</DialogTitle>
+        <DialogContent sx={{ width: '100%' }}>
+          <DialogContentText
+            width="100%"
+            height={80}
+            fontSize={14}
+            lineHeight={1.43}
+          >
+            Are you sure you want to delete this item? This can not be undone.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setItemToDelete(null)} variant="text">
+            Cancel
+          </Button>
+          <Button
+            onClick={handleDelete}
+            disabled={deleteItemStatus.isLoading}
+            startIcon={
+              deleteItemStatus.isLoading && <CircularProgress size={16} />
+            }
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Grid>
   );
 };

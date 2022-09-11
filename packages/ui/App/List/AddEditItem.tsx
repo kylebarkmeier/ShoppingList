@@ -41,15 +41,27 @@ const AddEditItem = ({
 
   const isLoading = addItemStatus.isLoading || editItemStatus.isLoading;
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = React.useCallback(() => {
+  const resetQueries = React.useCallback(() => {
     addItemStatus.reset();
     editItemStatus.reset();
-    setOpen(false);
   }, [addItemStatus, editItemStatus]);
+
+  const resetItem = React.useCallback(() => {
+    setName(item?.name || '');
+    setDescription(item?.description || '');
+    setQuantity(item?.quantity || 0);
+    setPurchased(item?.purchased || false);
+  }, [item]);
+
+  const handleClickOpen = React.useCallback(() => {
+    resetItem();
+    setOpen(true);
+  }, [resetItem]);
+
+  const handleClose = React.useCallback(() => {
+    resetQueries();
+    setOpen(false);
+  }, [resetQueries]);
 
   const handleSave = React.useCallback(() => {
     if (item) {
@@ -70,15 +82,6 @@ const AddEditItem = ({
       handleClose();
     }
   }, [addItemStatus.isSuccess, editItemStatus.isSuccess, handleClose]);
-
-  React.useEffect(() => {
-    if (item) {
-      setName(item?.name);
-      setDescription(item?.description || '');
-      setQuantity(item?.quantity);
-      setPurchased(item?.purchased);
-    }
-  }, [item]);
 
   return (
     <>

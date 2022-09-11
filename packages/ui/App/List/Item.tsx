@@ -10,22 +10,29 @@ import {
 } from '@mui/material';
 import { DeleteOutlined, EditOutlined } from '@mui/icons-material';
 import { ListItemType } from 'services/types';
-import { useEditItemMutation, useDeleteItemMutation } from 'services/queries';
+import { useEditItemMutation } from 'services/queries';
 import AddEditItem from 'App/List/AddEditItem';
 
-const Item = ({ item }: { item: ListItemType }) => {
+const Item = ({
+  item,
+  onDelete,
+  isDeleting = false,
+}: {
+  item: ListItemType;
+  onDelete: (id: string) => void;
+  isDeleting?: boolean;
+}) => {
   const [editItem, editItemStatus] = useEditItemMutation();
-  const [deleteItem, deleteItemStatus] = useDeleteItemMutation();
 
-  const isLoading = editItemStatus.isLoading || deleteItemStatus.isLoading;
+  const isLoading = editItemStatus.isLoading || isDeleting;
 
   const handlePurchase = React.useCallback(() => {
     editItem({ _id: item._id, purchased: !item.purchased });
   }, [editItem, item._id, item.purchased]);
 
   const handleDelete = React.useCallback(() => {
-    deleteItem({ _id: item._id });
-  }, [deleteItem, item._id]);
+    onDelete(item._id);
+  }, [onDelete, item._id]);
 
   return (
     <ListItem
@@ -77,11 +84,7 @@ const Item = ({ item }: { item: ListItemType }) => {
           <EditOutlined />
         </AddEditItem>
         <IconButton onClick={handleDelete} disabled={isLoading}>
-          {deleteItemStatus.isLoading ? (
-            <CircularProgress />
-          ) : (
-            <DeleteOutlined />
-          )}
+          {isDeleting ? <CircularProgress /> : <DeleteOutlined />}
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>

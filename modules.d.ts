@@ -25,6 +25,13 @@ declare module '@mui/material/styles' {
           };
         };
       };
+      MuiTypography: {
+        styleOverrides: {
+          root: {
+            lineHeight: string | number;
+          };
+        };
+      };
     };
     typography: {
       fontFamily: FontFamily;
@@ -40,6 +47,13 @@ declare module '@mui/material/styles' {
         styleOverrides: {
           root: {
             textTransform: string;
+          };
+        };
+      };
+      MuiTypography: {
+        styleOverrides: {
+          root: {
+            lineHeight: string | number;
           };
         };
       };

@@ -2,6 +2,15 @@
 
  A simple shopping list made in React, MUI, Redux ToolKit, TypeScript, NodeJS, Express, MongoDB, & Docker.
  
+## Usage
+
+### Prerequisites: `docker`, `docker-compose`, `yarn`, `node` (v18+)
+
+1. Clone repo and `cd` into it
+2. `yarn install`
+3. `yarn start`
+4. Once `webpack` finishes, the app should be available at http://localhost:8080
+ 
 ## Decisions
 
  I chose the front-end technologies because I am extremely familiar with them and was able to match the mocks quickly
